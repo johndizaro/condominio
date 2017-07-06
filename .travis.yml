@@ -2,5 +2,7 @@ language: python
 python:
   - "3.5.3-1"
 
+sudo: false
+
 install: "pip3 install -r requirements.txt"
 
