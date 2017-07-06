@@ -382,7 +382,6 @@ class CadCondominio:
         cur = conn.cursor()
         try:
             cur.execute("""
-
              UPDATE a01_condominio SET
              a01_nome = %s,
              a01_endereco = %s,
