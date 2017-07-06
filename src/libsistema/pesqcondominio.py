@@ -14,9 +14,8 @@ except ImportError as problema:
 
 try:
     # from gi.repository import GLib, GObject, Gio, Pango, GdkPixbuf, Gtk, Gdk, GtkSource
-    from gi.repository import Gtk, Gdk
+    from gi.repository import Gtk
 except ImportError as problema:
-    Gdk = None
     Gtk = None
     print(problema)
     exit(1)
@@ -57,12 +56,10 @@ except Exception as problema:
 
 
 class PesqCondominio:
-
     def __init__(self, *arg, **kwarg):
 
         self.ge_dic_param_sis = dict()
         self.JP = JanelaProblema()
-
 
         if kwarg['dic_param_sis']:
             self.ge_dic_param_sis = kwarg['dic_param_sis']
