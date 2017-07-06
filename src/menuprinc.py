@@ -18,11 +18,11 @@ except Exception as problema:
     print(problema)
     exit(1)
 
-try:
-    import sys
-except Exception as problema:
-    print(problema)
-    exit(1)
+# try:
+#     import sys
+# except Exception as problema:
+#     print(problema)
+#     exit(1)
 
 try:
     from os.path import dirname, abspath

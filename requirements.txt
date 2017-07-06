@@ -1,4 +1,6 @@
+gi
+src
 psycopg2==2.6.2
-pytest==3.1.2
+pytest==3.0.6
 
 
