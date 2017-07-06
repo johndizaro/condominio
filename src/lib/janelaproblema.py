@@ -3,6 +3,7 @@ from gi.repository import Gtk
 
 
 class JanelaProblema:
+
     def __init__(self):
         pass
 

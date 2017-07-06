@@ -1,5 +1,4 @@
 import logging
-import socket
 
 __author__ = 'John Evan Dizaro'
 
@@ -99,8 +98,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=None,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -119,8 +118,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=None,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -226,7 +225,7 @@ class CadBloco:
             lista.append([
                 str(i['a01_id_condominio']),
                 str(i['a01_nome']) if i['a01_nome'] else None,
-                ])
+            ])
 
     def on_b03_fechar_clicked(self, widget):
         """
@@ -264,8 +263,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -390,8 +389,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -416,8 +415,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -440,8 +439,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -463,8 +462,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -494,8 +493,8 @@ class CadBloco:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
                             texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                str(sys._getframe(0).f_code.co_name),
-                                                                str(sys._getframe(0).f_lineno)),
+                                                                                 str(sys._getframe(0).f_code.co_name),
+                                                                                 str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
