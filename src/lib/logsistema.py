@@ -1,13 +1,6 @@
 import socket
 
 try:
-    from src.lib.janelaproblema import JanelaProblema
-except ImportError as problema:
-    print(problema)
-    logging = None
-    exit(1)
-
-try:
     import logging
 except ImportError as problema:
     print(problema)
@@ -26,43 +19,40 @@ class LogSistema:
         if kwarg['dic_param_sis']:
             self.ge_dic_param_sis = kwarg['dic_param_sis']
         else:
-            self.JanelaProblema.msgerro(self,
-                                        janela=None,
-                                        texto_primario=self.__class__.__name_,
-                                        texto_secundario='Não foi possivel trazer DIC_DB!')
             exit(1)
 
-        x = 0
+        tipo_log = 0
         if self.ge_dic_param_sis['TIPO_LOG'] == 'DEBUG':
-            x = logging.DEBUG
+            tipo_log = logging.DEBUG
         elif self.ge_dic_param_sis['TIPO_LOG'] == 'INFO':
-            x = logging.INFO
+            tipo_log = logging.INFO
         elif self.ge_dic_param_sis['TIPO_LOG'] == 'WARNING':
-            x = logging.WARNING
+            tipo_log = logging.WARNING
         elif self.ge_dic_param_sis['TIPO_LOG'] == 'ERROR':
-            x = logging.ERROR
+            tipo_log = logging.ERROR
         elif self.ge_dic_param_sis['TIPO_LOG'] == 'CRITICAL':
-            x = logging.CRITICAL
+            tipo_log = logging.CRITICAL
         else:
-            self.JanelaProblema.msgerro(self,
-                                        janela=None,
-                                        texto_primario=self.__class__.__name_,
-                                        texto_secundario='Opção inválida em [LOG]...LOG_CAMINHO =???!')
+            logging.error("Problemas na confiuração do LOG ")
             exit(1)
 
-        xip = str(socket.gethostbyname(socket.gethostname()))
+        ip = str(socket.gethostbyname(socket.gethostname()))
 
-        logging.basicConfig(level=x,
-                            format='%(asctime)s '
-                                   '%(ip)s'
-                                   'ARQUIVO:%(filename)s '
-                                   'MODULO:%(module)s '
-                                   'FUNÇÃO:%(funcName)s '
-                                   'LINHA:%(lineno)d '
-                                   'MENSAGEM:%(message)s',
-                            datefmt='%a, %d %b %Y %H:%M:%S',
-                            filename=self.ge_dic_param_sis['LOG_CAMINHO'],
-                            filemode='a'
-                            )
+        formato_msg = '%(levelname)8s: ' \
+                      '\t%(asctime)s ' \
+                      'IP:{:<15} ' \
+                      'FILENAME:%(filename)-20s ' \
+                      'FUNCNAME:%(funcName)-30s ' \
+                      'MODULE:%(module)-s ' \
+                      'LINENO:%(lineno)d ' \
+                      'MSG: %(message)-s'.format(ip)
 
-        # logging.info("LOG INICIADA PARA O IP:{ip}".format(ip=str(socket.gethostbyname(socket.gethostname()))))
+
+        logging.basicConfig(
+            format=formato_msg,
+            level=tipo_log,
+            filename=self.ge_dic_param_sis['LOG_CAMINHO'])
+
+        logging.info(" Entrou no sistema ")
+
+

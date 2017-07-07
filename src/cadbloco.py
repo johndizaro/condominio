@@ -1,4 +1,6 @@
+
 import logging
+
 
 __author__ = 'John Evan Dizaro'
 
@@ -75,6 +77,24 @@ except Exception as problema:
 
 class CadBloco:
     def __init__(self, *arg, **kwarg):
+        logging.info('entrei no cadbloco')
+
+
+
+        ###
+        #### rotina  para salvar em string  quem chamou e quem foi chamada
+        ###
+        #import traceback
+        # stack = traceback.extract_stack()
+        # chamador_filename, chamador_codeline, chamador_funcName, chamador_text = stack[-2]
+        # print(inspect.getframeinfo(inspect.currentframe())[2])
+        # print(chamador_filename, chamador_codeline, chamador_funcName, chamador_text)
+        # chamado_filename, chamado_codeline, chamado_funcName, chamado_text = stack[-1]
+        # print(inspect.getframeinfo(inspect.currentframe())[2])
+        # print(chamado_filename, chamado_codeline, chamado_funcName, chamado_text)
+
+
+
 
         self.col_a01_id_condominio = 0
         self.col_a01_nome = 1
@@ -86,6 +106,7 @@ class CadBloco:
         self.ge_dic_dados = dict()
         self.ge_dic_param_sis = dict()
         self.ge_selecionado = False
+        self.ge_titulo = None
 
         self.ge_a03_id_bloco = 0
 
@@ -96,10 +117,24 @@ class CadBloco:
         else:
             msg = 'Esta faltando os parametros do sistema'
             logging.error(msg)
+
             self.JP.msgerro(janela=None,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
+                            texto_secundario=msg)
+            exit(1)
+
+        if kwarg['titulo']:
+            self.ge_titulo = kwarg['titulo']
+        else:
+            msg = 'Esta faltando o parametro Título do sistema'
+            logging.error(msg)
+
+            self.JP.msgerro(janela=None,
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -117,15 +152,15 @@ class CadBloco:
         except Exception as msg:
             logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
         self.builder.connect_signals(self)
         self.w03 = self.builder.get_object("w03_bloco")
-        self.w03.set_title("Cadastro de Bloco")
+        self.w03.set_title(self.ge_titulo)
 
         self.l03_a03_id_condominio = self.builder.get_object("l03_a03_id_condominio")
         self.l03_a03_id_condominio.set_markup("<b>{a}</b>".format(a=self.l03_a03_id_condominio.get_text()))
@@ -155,12 +190,25 @@ class CadBloco:
         self.w03.set_visible(True)
         self.w03.show_all()
 
+        #
+        # curframe = inspect.currentframe()
+        # print('--->', curframe.f_lineno)
+        #
+        # (frame, filename, line_number,function_name, lines, index) = inspect.getouterframes(inspect.currentframe())[1]
+        # print('1->',frame, '\n1->',filename, '\n1->',line_number, '\n1->',function_name, '\n1->',lines, '\n1->',index)
+        #
+        # calframe = inspect.getouterframes(curframe, 2)
+        # print(calframe)
+        #
+        # print('caller name:', calframe[1][3])
+
     def desenha_tv03(self, tv):
         """
         desenha as colunas do treeview
         :param tv:recebe o objeto do treeview
         :return:
         """
+
 
         tv.set_rules_hint(True)
         tv.set_grid_lines(3)
@@ -233,6 +281,7 @@ class CadBloco:
         :param widget:
         :return:
         """
+
         self.w03.destroy()
 
     def on_b03_salvar_clicked(self, widget):

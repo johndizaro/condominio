@@ -1,4 +1,5 @@
 import logging
+import traceback
 
 __author__ = 'John Evan Dizaro'
 
@@ -18,11 +19,11 @@ except Exception as problema:
     print(problema)
     exit(1)
 
-# try:
-#     import sys
-# except Exception as problema:
-#     print(problema)
-#     exit(1)
+try:
+    import sys
+except Exception as problema:
+    print(problema)
+    exit(1)
 
 try:
     from os.path import dirname, abspath
@@ -96,6 +97,9 @@ class MenuPrinc:
                             texto_secundario=problema)
             exit(1)
 
+
+
+
         self.caminho_src = abspath(dirname(__file__))
 
         self.builder = Gtk.Builder()
@@ -109,6 +113,8 @@ class MenuPrinc:
                             texto_primario="Telas do sistema",
                             texto_secundario=problema)
             exit(1)
+
+
 
         self.builder.connect_signals(self)
         self.w00 = self.builder.get_object("w00_principal")
@@ -131,7 +137,8 @@ class MenuPrinc:
 
     def on_mnu_cad_bloco_activate(self, widget):
 
-        CadBloco(dic_param_sis=self.ge_dic_param_sis)
+        titulo = widget.get_label().strip('_')
+        CadBloco(dic_param_sis=self.ge_dic_param_sis, titulo= titulo)
 
     def on_w00_principal_delete_event(self, widget):
         Gtk.main_quit()
