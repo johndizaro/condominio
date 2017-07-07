@@ -1,6 +1,5 @@
-
 import logging
-
+import sys
 
 __author__ = 'John Evan Dizaro'
 
@@ -31,18 +30,18 @@ except ImportError as problema:
     psycopg2 = None
     exit(1)
 
-try:
-    import re
-except ImportError as problema:
-    print(problema)
-    re = None
-    exit(1)
-try:
-    import sys
-except ImportError as problema:
-    print(problema)
-    sys = None
-    exit(1)
+# try:
+#     import re
+# except ImportError as problema:
+#     print(problema)
+#     re = None
+#     exit(1)
+# try:
+#     import sys
+# except ImportError as problema:
+#     print(problema)
+#     sys = None
+#     exit(1)
 
 try:
     from os.path import dirname, abspath
@@ -76,15 +75,13 @@ except Exception as problema:
 
 
 class CadBloco:
-    def __init__(self, *arg, **kwarg):
+    def __init__(self, **kwarg):
         logging.info('entrei no cadbloco')
 
-
-
-        ###
-        #### rotina  para salvar em string  quem chamou e quem foi chamada
-        ###
-        #import traceback
+        #
+        # rotina  para salvar em string  quem chamou e quem foi chamada
+        #
+        # import traceback
         # stack = traceback.extract_stack()
         # chamador_filename, chamador_codeline, chamador_funcName, chamador_text = stack[-2]
         # print(inspect.getframeinfo(inspect.currentframe())[2])
@@ -92,9 +89,6 @@ class CadBloco:
         # chamado_filename, chamado_codeline, chamado_funcName, chamado_text = stack[-1]
         # print(inspect.getframeinfo(inspect.currentframe())[2])
         # print(chamado_filename, chamado_codeline, chamado_funcName, chamado_text)
-
-
-
 
         self.col_a01_id_condominio = 0
         self.col_a01_nome = 1
@@ -209,7 +203,6 @@ class CadBloco:
         :return:
         """
 
-
         tv.set_rules_hint(True)
         tv.set_grid_lines(3)
 
@@ -275,7 +268,7 @@ class CadBloco:
                 str(i['a01_nome']) if i['a01_nome'] else None,
             ])
 
-    def on_b03_fechar_clicked(self, widget):
+    def on_b03_fechar_clicked(self):
         """
         libera o CadBloco - apagar da tela
         :param widget:
@@ -284,7 +277,7 @@ class CadBloco:
 
         self.w03.destroy()
 
-    def on_b03_salvar_clicked(self, widget):
+    def on_b03_salvar_clicked(self):
         """
         Manda executar a validação dos campos da tela bem como verifica se
         os dados devem ser alterados ou incluidos
@@ -308,12 +301,12 @@ class CadBloco:
             res = self.PB.pesquisar_blocos(id_condominio=self.ge_a01_id_condominio)
             self.mostrar_dados_tv03(lista=self.lst_tv03, res=res)
         else:
-            msg = "Problemas ao salvar informações"
+            msg = "Problemas ao Dicionário não encontrado"
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -437,9 +430,10 @@ class CadBloco:
         except psycopg2.ProgrammingError as msg:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            texto_primario="Problema na rotina de Incluir",
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -463,9 +457,10 @@ class CadBloco:
         except (psycopg2.DatabaseError, psycopg2.ProgrammingError) as msg:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            texto_primario='Problma ao Incluir dados novos',
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -487,9 +482,10 @@ class CadBloco:
         except psycopg2.ProgrammingError as msg:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            texto_primario='Problema ao Alterar Dados',
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -510,9 +506,10 @@ class CadBloco:
         except psycopg2.DatabaseError as msg:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            texto_primario='Problema ao Atualisar dados',
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
@@ -541,9 +538,10 @@ class CadBloco:
         except psycopg2.ProgrammingError as msg:
             logging.error(msg)
             self.JP.msgerro(janela=self.w03,
-                            texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                                                                                 str(sys._getframe(0).f_code.co_name),
-                                                                                 str(sys._getframe(0).f_lineno)),
+                            texto_primario='Problemas ao Carregar Blocos',
+                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
+                            #                                                      str(sys._getframe(0).f_code.co_name),
+                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             return False
 
