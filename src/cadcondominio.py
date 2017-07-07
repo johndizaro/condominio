@@ -1,5 +1,5 @@
 import logging
-
+import re
 
 __author__ = 'John Evan Dizaro'
 
@@ -30,12 +30,6 @@ except ImportError as problema:
     psycopg2 = None
     exit(1)
 
-try:
-    import re
-except ImportError as problema:
-    print(problema)
-    re = None
-    exit(1)
 
 # try:
 #     import sys
@@ -173,7 +167,7 @@ class CadCondominio:
         tela = widget.get_parent_window()
         tela.destroy()
 
-    def on_b01_exluir_clicked(self, widget):
+    def on_b01_exluir_clicked(self):
 
         if not self.ge_selecionado:
             msg = "Você deverá selecionar o condomínio antes de exclui-lo"
