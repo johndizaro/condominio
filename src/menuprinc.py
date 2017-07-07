@@ -1,5 +1,4 @@
 import logging
-import traceback
 
 __author__ = 'John Evan Dizaro'
 
@@ -19,11 +18,12 @@ except Exception as problema:
     print(problema)
     exit(1)
 
-try:
-    import sys
-except Exception as problema:
-    print(problema)
-    exit(1)
+
+# try:
+#     import sys
+# except Exception as problema:
+#     print(problema)
+#     exit(1)
 
 try:
     from os.path import dirname, abspath
@@ -69,11 +69,11 @@ except Exception as problema:
 
 
 class MenuPrinc:
-    def __init__(self, **kwarg):
+    def __init__(self):
         """
         inicialisacao dos campos do menu
         """
-
+        self.problema = None
         self.JP = JanelaProblema()
 
         self.ge_dic_param_sis = dict()
@@ -81,24 +81,21 @@ class MenuPrinc:
         self.ge_dic_param_sis = self.Pr.carrega_parametros()
 
         if not self.ge_dic_param_sis:
-            problema = 'Dicionario de parametros vazio ou não localizado'
-            logging.error(problema)
+            self.problema = 'Dicionario de parametros vazio ou não localizado'
+            logging.error(self.problema)
             self.JP.msgerro(janela=None,
                             texto_primario="Parametros",
-                            texto_secundario=problema)
+                            texto_secundario=self.problema)
             exit(1)
 
         try:
             self.lg = LogSistema(dic_param_sis=self.ge_dic_param_sis)
-        except IOError as problema:
-            logging.error(problema)
+        except IOError as problema_lg:
+            logging.error(problema_lg)
             self.JP.msgerro(janela=None,
                             texto_primario="Log",
-                            texto_secundario=problema)
+                            texto_secundario=problema_lg)
             exit(1)
-
-
-
 
         self.caminho_src = abspath(dirname(__file__))
 
@@ -107,14 +104,12 @@ class MenuPrinc:
         try:
             self.caminho_tela = '/'.join([self.caminho_src, 'glade', 'menu-principal.glade'])
             self.builder.add_objects_from_file(self.caminho_tela, ["w00_principal"])
-        except Exception as problema:
-            logging.error(problema)
+        except Exception as problema_tl:
+            logging.error(problema_tl)
             self.JP.msgerro(janela=None,
                             texto_primario="Telas do sistema",
-                            texto_secundario=problema)
+                            texto_secundario=problema_tl)
             exit(1)
-
-
 
         self.builder.connect_signals(self)
         self.w00 = self.builder.get_object("w00_principal")
@@ -131,22 +126,22 @@ class MenuPrinc:
 
         CadCondominio(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
-    def on_mnu_cad_portaria_activate(self, widget):
+    def on_mnu_cad_portaria_activate(self):
 
         CadPortaria(dic_param_sis=self.ge_dic_param_sis)
 
     def on_mnu_cad_bloco_activate(self, widget):
 
         titulo = widget.get_label().strip('_')
-        CadBloco(dic_param_sis=self.ge_dic_param_sis, titulo= titulo)
+        CadBloco(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
-    def on_w00_principal_delete_event(self, widget):
+    def on_w00_principal_delete_event(self):
         Gtk.main_quit()
 
-    def on_w00_principal_destroy(self, widget):
+    def on_w00_principal_destroy(self):
         Gtk.main_quit()
 
-    def on_w00_principal_destroy_event(self, widget):
+    def on_w00_principal_destroy_event(self):
         Gtk.main_quit()
 
 
