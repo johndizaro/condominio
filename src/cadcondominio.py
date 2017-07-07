@@ -36,12 +36,13 @@ except ImportError as problema:
     print(problema)
     re = None
     exit(1)
-try:
-    import sys
-except ImportError as problema:
-    print(problema)
-    sys = None
-    exit(1)
+
+# try:
+#     import sys
+# except ImportError as problema:
+#     print(problema)
+#     sys = None
+#     exit(1)
 
 try:
     from os.path import dirname, abspath
