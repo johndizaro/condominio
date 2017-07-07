@@ -9,7 +9,7 @@ except ImportError as problema:
 
 
 class LogSistema:
-    def __init__(self, *arg, **kwarg):
+    def __init__(self, **kwarg):
 
         self.ge_dic_param_sis = {}
         self.ge_dic_usuario = {}
@@ -46,7 +46,6 @@ class LogSistema:
                       'MODULE:%(module)-s ' \
                       'LINENO:%(lineno)d ' \
                       'MSG: %(message)-s'.format(ip)
-
 
         logging.basicConfig(
             format=formato_msg,
