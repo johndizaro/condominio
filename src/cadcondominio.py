@@ -186,11 +186,11 @@ class CadCondominio:
 
         self.e01_a01_nome.grab_focus()
 
-    def on_b01_salvar_clicked(self, widget):
+    def on_b01_salvar_clicked(self):
 
         """
         executa as rotina para salvar e validas os campos de tela
-        :param widget:
+        :param:
         :return:
         """
 

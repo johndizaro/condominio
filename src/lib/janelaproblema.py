@@ -1,5 +1,4 @@
 from gi.repository import Gtk
-# from gi.overrides import Gtk
 
 
 class JanelaProblema:

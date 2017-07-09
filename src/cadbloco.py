@@ -1,5 +1,4 @@
 import logging
-import sys
 
 __author__ = 'John Evan Dizaro'
 
@@ -271,7 +270,7 @@ class CadBloco:
     def on_b03_fechar_clicked(self):
         """
         libera o CadBloco - apagar da tela
-        :param widget:
+        :param:
         :return:
         """
 
@@ -281,7 +280,7 @@ class CadBloco:
         """
         Manda executar a validação dos campos da tela bem como verifica se
         os dados devem ser alterados ou incluidos
-        :param widget:
+        :param:
         :return:
         """
 

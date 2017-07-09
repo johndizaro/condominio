@@ -1,23 +1,12 @@
 import logging
-import socket
 
 __author__ = 'John Evan Dizaro'
 
 try:
     import gi
-
     gi.require_version('Gtk', '3.0')
 except ImportError as problema:
     gi = None
-    print(problema)
-    exit(1)
-
-try:
-    # from gi.repository import GLib, GObject, Gio, Pango, GdkPixbuf, Gtk, Gdk, GtkSource
-    from gi.repository import Gtk, Gdk
-except ImportError as problema:
-    Gdk = None
-    Gtk = None
     print(problema)
     exit(1)
 
@@ -31,25 +20,6 @@ except ImportError as problema:
     exit(1)
 
 try:
-    import re
-except ImportError as problema:
-    print(problema)
-    re = None
-    exit(1)
-try:
-    import sys
-except ImportError as problema:
-    print(problema)
-    sys = None
-    exit(1)
-
-try:
-    from os.path import dirname, abspath
-except Exception as problema:
-    print(problema)
-    exit(1)
-
-try:
     from src.lib.janelaproblema import JanelaProblema
 except Exception as problema:
     print(problema)
@@ -58,11 +28,10 @@ except Exception as problema:
 
 class PesqCondominio:
 
-    def __init__(self, *arg, **kwarg):
+    def __init__(self, **kwarg):
 
         self.ge_dic_param_sis = dict()
         self.JP = JanelaProblema()
-
 
         if kwarg['dic_param_sis']:
             self.ge_dic_param_sis = kwarg['dic_param_sis']

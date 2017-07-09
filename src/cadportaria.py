@@ -70,7 +70,7 @@ except Exception as problema:
 
 class CadPortaria:
 
-    def __init__(self, *arg, **kwarg):
+    def __init__(self, **kwarg):
 
         # self.ge_dic_dados = dict()
         self.ge_dic_param_sis = dict()
@@ -94,17 +94,9 @@ class CadPortaria:
             self.ge_dic_param_sis = kwarg['dic_param_sis']
         else:
             msg = 'Esta faltando os parametros do sistema'
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             exit(1)
 
@@ -116,15 +108,9 @@ class CadPortaria:
             self.Caminho = '/'.join([abspath(dirname(__file__)), 'glade', 'menu-principal.glade'])
             self.builder.add_objects_from_file(self.Caminho, ["w02_portaria"])
         except Exception as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)))
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             exit(1)
 
@@ -168,19 +154,19 @@ class CadPortaria:
         self.w02.set_visible(True)
         self.w02.show_all()
 
-    def on_b02_fechar_clicked(self, widget):
+    def on_b02_fechar_clicked(self):
         """
 
-        :param widget:
+        :param:
         :return:
         """
         self.w02.destroy()
 
-    def on_b02_salvar_clicked(self, widget):
+    def on_b02_salvar_clicked(self):
 
         """
         executa as rotina para salvar e validas os campos de tela
-        :param widget:
+        :param:
         :return:
         """
         dados_salvos = False
@@ -201,24 +187,15 @@ class CadPortaria:
             self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
         else:
             msg = "Problemas ao salvar informações"
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
-            exit(1)
 
-    def on_b02_excluir_clicked(self, widget):
+    def on_b02_excluir_clicked(self):
         """
         verifica se foi selecionado uma portaria ṕara apagar e executa a rotina de apagar portaria
-        :param widget:
+        :param:
         :return:
         """
         apagado = False
@@ -231,14 +208,10 @@ class CadPortaria:
             apagado = self.apagar_portaria(id_portaria=dic_dados['a02_id_portaria'])
         else:
             msg = "Selecione uma portaria para apagar"
-            logging.warning("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
+            self.JP.msgerro(janela=None,
+                            texto_primario="Cadastro de Portaria",
+                            texto_secundario=msg)
 
         if apagado:
             id_condominio = self.ge_id_condominio
@@ -247,17 +220,9 @@ class CadPortaria:
             self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
         else:
             msg = "Problemas ao Apagar Portaria"
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             exit(1)
 
@@ -310,7 +275,7 @@ class CadPortaria:
                 dic_dados['a02_numero'] = self.e02_a02_numero.get_text()
                 self.e02_a02_numero.set_property("primary-icon-stock", None)
 
-        if valido == False:
+        if valido is False:
             dic_dados = False
 
         return dic_dados
@@ -339,17 +304,9 @@ class CadPortaria:
             conn = psycopg2.connect(self.ge_dic_param_sis['DSN'])
             conn.set_client_encoding(self.ge_dic_param_sis['CLIENTEENCODING'])
         except psycopg2.ProgrammingError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 
@@ -372,17 +329,9 @@ class CadPortaria:
                 )
             )
         except psycopg2.DatabaseError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 
@@ -406,17 +355,9 @@ class CadPortaria:
             conn = psycopg2.connect(self.ge_dic_param_sis['DSN'])
             conn.set_client_encoding(self.ge_dic_param_sis['CLIENTEENCODING'])
         except psycopg2.ProgrammingError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 
@@ -444,17 +385,9 @@ class CadPortaria:
                 )
             )
         except psycopg2.DatabaseError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 
@@ -464,22 +397,14 @@ class CadPortaria:
         del conn, cur
         return True
 
-    def apagar_portaria(self,id_portaria):
+    def apagar_portaria(self, id_portaria):
         try:
             conn = psycopg2.connect(self.ge_dic_param_sis['DSN'])
             conn.set_client_encoding(self.ge_dic_param_sis['CLIENTEENCODING'])
         except psycopg2.ProgrammingError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 
@@ -493,17 +418,9 @@ class CadPortaria:
                 )
             )
         except psycopg2.DatabaseError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 
@@ -512,7 +429,6 @@ class CadPortaria:
 
         del conn, cur
         return True
-
 
     def mostrar_dados_tv02(self, lista, res):
 
@@ -588,7 +504,6 @@ class CadPortaria:
         tv.set_enable_search(True)
         tv.set_headers_clickable(True)
 
-
     def clicado_col_tv02(self, widget, tv, coluna):
         """
         habilita pesquisa de tv
@@ -598,7 +513,6 @@ class CadPortaria:
         widget.set_sort_column_id(coluna)
 
         tv.set_search_column(coluna)
-
 
     def pesquisar_portarias(self, id_condominio=0):
 
@@ -621,17 +535,9 @@ class CadPortaria:
             registros = cur.fetchall()
 
         except psycopg2.ProgrammingError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 
@@ -709,17 +615,9 @@ class CadPortaria:
             registros = cur.fetchall()
 
         except psycopg2.ProgrammingError as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
             return False
 

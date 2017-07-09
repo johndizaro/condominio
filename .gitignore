@@ -106,3 +106,5 @@ ENV/
 src/glade/menu-principal.glade~
 src/logsistema.txt
 src/test/
+src/lib/
+src/libsistema/__init__.py
