@@ -68,17 +68,9 @@ class PesqCondominio:
             self.ge_dic_param_sis = kwarg['dic_param_sis']
         else:
             msg = 'Esta faltando os parametros do sistema'
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Pesquisa de Condomínio",
                             texto_secundario=msg)
             exit(1)
 
@@ -95,35 +87,21 @@ class PesqCondominio:
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""SELECT * FROM a01_condominio ORDER BY a01_nome ASC ;""")
         except psycopg2.Error as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Pesquisa de Condomínio",
                             texto_secundario=msg)
+            exit(1)
             return False
 
         try:
             registros = cur.fetchall()
         except Exception as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Pesquisa de Condomínio",
                             texto_secundario=msg)
+            exit(1)
             return False
 
         if not registros:

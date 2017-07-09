@@ -1,5 +1,4 @@
 import logging
-import socket
 
 __author__ = 'John Evan Dizaro'
 
@@ -13,34 +12,12 @@ except ImportError as problema:
     exit(1)
 
 try:
-    # from gi.repository import GLib, GObject, Gio, Pango, GdkPixbuf, Gtk, Gdk, GtkSource
-    from gi.repository import Gtk, Gdk
-except ImportError as problema:
-    Gdk = None
-    Gtk = None
-    print(problema)
-    exit(1)
-
-try:
     import psycopg2
     import psycopg2.extras
     import psycopg2.extensions
 except ImportError as problema:
     print(problema)
     psycopg2 = None
-    exit(1)
-
-try:
-    import re
-except ImportError as problema:
-    print(problema)
-    re = None
-    exit(1)
-try:
-    import sys
-except ImportError as problema:
-    print(problema)
-    sys = None
     exit(1)
 
 try:
@@ -57,32 +34,22 @@ except Exception as problema:
 
 
 class PesqBloco:
-
-    def __init__(self, *arg, **kwarg):
+    def __init__(self, **kwarg):
 
         self.ge_dic_param_sis = dict()
         self.JP = JanelaProblema()
-
 
         if kwarg['dic_param_sis']:
             self.ge_dic_param_sis = kwarg['dic_param_sis']
         else:
             msg = 'Esta faltando os parametros do sistema'
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Pesquisa de Condomínio",
                             texto_secundario=msg)
             exit(1)
 
-    def pesquisar_blocos(self, id_condominio = 0):
+    def pesquisar_blocos(self, id_condominio=0):
         """
         Faz a leitura de todos os blocos do condomínio especificado
         :return: lista de dicionarios com todos os campos  por ordem de a01_nome
@@ -102,34 +69,18 @@ class PesqBloco:
                         """, (id_condominio,)
                         )
         except psycopg2.Error as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Pesquisa de Condomínio",
                             texto_secundario=msg)
             return False
 
         try:
             registros = cur.fetchall()
         except Exception as msg:
-            logging.error("IP:{ip} -class:{a} \t{b} ->def:{c} \t - {d}".format(
-                ip=str(socket.gethostbyname(socket.gethostname())),
-                a=str(self.__class__.__name__),
-                b=str(sys._getframe(1).f_code.co_name),
-                c=str(sys._getframe(0).f_code.co_name),
-                d=str(msg)
-            )
-            )
+            logging.error(msg)
             self.JP.msgerro(janela=None,
-                            texto_primario="{aa} - {bb}".format(aa=str(self.__class__.__name__),
-                                                                bb=str(sys._getframe(0).f_code.co_name)),
+                            texto_primario="Pesquisa de Condomínio",
                             texto_secundario=msg)
             return False
 
