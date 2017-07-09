@@ -1,5 +1,4 @@
 import logging
-import socket
 
 __author__ = 'John Evan Dizaro'
 
@@ -169,7 +168,7 @@ class CadPortaria:
         :param:
         :return:
         """
-        dados_salvos = False
+        # dados_salvos = False
         dic_dados = self.validar_campos()
         if not dic_dados:
             return False
@@ -554,10 +553,6 @@ class CadPortaria:
         return lst_dic_dados
 
     def on_tv02_a02_key_press_event(self, widget, event):
-
-        id_condominio = 0
-        id_portaria = 0
-        dic_portaria = dict()
 
         keyval = Gdk.keyval_name(event.keyval)
         if keyval == 'Return' or keyval == 'KP_Enter':
