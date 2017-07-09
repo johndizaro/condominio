@@ -284,8 +284,6 @@ class CadBloco:
         :return:
         """
 
-        dados_salvo = False
-        dic_dados = dict()
         dic_dados = self.validar_campos()
         if not dic_dados:
             return False
@@ -295,10 +293,10 @@ class CadBloco:
                 dados_salvo = self.alterar(dic_dados=dic_dados)
             else:
                 dados_salvo = self.incluir(dic_dados=dic_dados)
-
-            self.limpar_tela()
-            res = self.PB.pesquisar_blocos(id_condominio=self.ge_a01_id_condominio)
-            self.mostrar_dados_tv03(lista=self.lst_tv03, res=res)
+            if dados_salvo:
+                self.limpar_tela()
+                res = self.PB.pesquisar_blocos(id_condominio=self.ge_a01_id_condominio)
+                self.mostrar_dados_tv03(lista=self.lst_tv03, res=res)
         else:
             msg = "Problemas ao Dicionário não encontrado"
             logging.error(msg)
@@ -326,13 +324,10 @@ class CadBloco:
             # res = self.pesquisar_portarias(id_condominio=id_condominio)
             # self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
             # self.ge_id_condominio = id_condominio
-        except:
+        except ValueError:
             pass
 
     def on_tv03_a03_key_press_event(self, widget, event):
-
-        id_bloco = 0
-        dic_bloco = dict()
 
         keyval = Gdk.keyval_name(event.keyval)
         if keyval == 'Return' or keyval == 'KP_Enter':

@@ -21,12 +21,6 @@ except ImportError as problema:
     exit(1)
 
 try:
-    from os.path import dirname, abspath
-except Exception as problema:
-    print(problema)
-    exit(1)
-
-try:
     from src.lib.janelaproblema import JanelaProblema
 except Exception as problema:
     print(problema)

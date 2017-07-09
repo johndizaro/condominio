@@ -233,7 +233,7 @@ class CadPortaria:
             res = self.pesquisar_portarias(id_condominio=id_condominio)
             self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
             self.ge_id_condominio = id_condominio
-        except:
+        except ValueError:
             pass
 
     def validar_campos(self):
