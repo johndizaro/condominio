@@ -112,9 +112,6 @@ class CadBloco:
             logging.error(msg)
 
             self.JP.msgerro(janela=None,
-                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                            #                                                      str(sys._getframe(0).f_code.co_name),
-                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -125,9 +122,6 @@ class CadBloco:
             logging.error(msg)
 
             self.JP.msgerro(janela=None,
-                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                            #                                                      str(sys._getframe(0).f_code.co_name),
-                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -145,9 +139,6 @@ class CadBloco:
         except Exception as msg:
             logging.error(msg)
             self.JP.msgerro(janela=None,
-                            # texto_primario="class:{} - def:{} - linha:{}".format(str(self.__class__.__name__),
-                            #                                                      str(sys._getframe(0).f_code.co_name),
-                            #                                                      str(sys._getframe(0).f_lineno)),
                             texto_secundario=msg)
             exit(1)
 
@@ -321,9 +312,7 @@ class CadBloco:
 
             res = self.PB.pesquisar_blocos(id_condominio=self.ge_a01_id_condominio)
             self.mostrar_dados_tv03(lista=self.lst_tv03, res=res)
-            # res = self.pesquisar_portarias(id_condominio=id_condominio)
-            # self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
-            # self.ge_id_condominio = id_condominio
+
         except ValueError:
             pass
 

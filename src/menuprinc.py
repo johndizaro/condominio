@@ -126,9 +126,10 @@ class MenuPrinc:
 
         CadCondominio(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
-    def on_mnu_cad_portaria_activate(self):
+    def on_mnu_cad_portaria_activate(self, widget):
 
-        CadPortaria(dic_param_sis=self.ge_dic_param_sis)
+        titulo = widget.get_label().strip('_')
+        CadPortaria(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
     def on_mnu_cad_bloco_activate(self, widget):
 
