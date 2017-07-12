@@ -4,7 +4,7 @@ class ComboBoxDados:
     def __init__(self, *arg, **kwarg):
         pass
 
-    def get_dado_combo(self, comboboxm, col_pesq, col_traz):
+    def get_dado_combo(self, comboboxm,  col_traz):
         """
         Pegar o texto ativo no combobox corrente
         """

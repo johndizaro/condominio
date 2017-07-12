@@ -258,14 +258,15 @@ class CadBloco:
                 str(i['a01_nome']) if i['a01_nome'] else None,
             ])
 
-    def on_b03_fechar_clicked(self):
+    def on_b03_fechar_clicked(self, widget):
         """
         libera o CadBloco - apagar da tela
         :param:
         :return:
         """
-
-        self.w03.destroy()
+        tela = widget.get_parent_window()
+        tela.destroy()
+        # self.w03.destroy()
 
     def on_b03_salvar_clicked(self):
         """
@@ -307,7 +308,6 @@ class CadBloco:
 
         try:
             self.ge_a01_id_condominio = self.CBD.get_dado_combo(comboboxm=widget,
-                                                                col_pesq=self.col_a01_nome,
                                                                 col_traz=self.col_a01_id_condominio)
 
             res = self.PB.pesquisar_blocos(id_condominio=self.ge_a01_id_condominio)

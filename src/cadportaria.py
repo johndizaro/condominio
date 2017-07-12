@@ -153,16 +153,17 @@ class CadPortaria:
         self.w02.set_visible(True)
         self.w02.show_all()
 
-    def on_b02_fechar_clicked(self):
+    def on_b02_fechar_clicked(self, widget):
         """
-
         :param:
         :return:
         """
+        # tela = widget.get_parent_window()
+        # tela.destroy()
+        # self.w02.destroy()
         self.w02.destroy()
 
-    def on_b02_salvar_clicked(self):
-
+    def on_b02_salvar_clicked(self, widget):
         """
         executa as rotina para salvar e validas os campos de tela
         :param:
@@ -191,7 +192,7 @@ class CadPortaria:
                             texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
 
-    def on_b02_excluir_clicked(self):
+    def on_b02_excluir_clicked(self, widget):
         """
         verifica se foi selecionado uma portaria ṕara apagar e executa a rotina de apagar portaria
         :param:
@@ -228,7 +229,6 @@ class CadPortaria:
     def on_cb02_a02_id_condominio_changed(self, widget):
         try:
             id_condominio = self.CBD.get_dado_combo(comboboxm=widget,
-                                                    col_pesq=self.col_cb02_a01_nome,
                                                     col_traz=self.col_cb02_a01_id_condominio)
             res = self.pesquisar_portarias(id_condominio=id_condominio)
             self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
