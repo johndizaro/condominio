@@ -237,8 +237,11 @@ class CadPortaria:
             id_condominio = self.CBD.get_dado_combo(comboboxm=widget,
                                                     col_traz=self.col_cb02_a01_id_condominio)
             res = self.pesquisar_portarias(id_condominio=id_condominio)
-            self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
-            self.ge_id_condominio = id_condominio
+            self.lst_tv02.clear()
+            if res:
+                self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
+                self.ge_id_condominio = id_condominio
+
         except AttributeError:
             pass
 
@@ -529,7 +532,7 @@ class CadPortaria:
             conn.set_client_encoding(self.ge_dic_param_sis['CLIENTEENCODING'])
 
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            sql = """ select a02_id_condominio,
+            cur.execute(""" select a02_id_condominio,
                                    a02_id_portaria,
                                    a02_nome_portaria,
                                    concat(a02_endereco, ', ', a02_numero) as dados_portaria
@@ -537,8 +540,7 @@ class CadPortaria:
                             WHERE a01_id_condominio = a02_portarias.a02_id_condominio
                             and a01_id_condominio = %s 
                             order by upper(a02_nome_portaria);
-                            """, (id_condominio,)
-            cur.execute(sql)
+                            """, (id_condominio,))
             registros = cur.fetchall()
 
         except psycopg2.ProgrammingError as msg:

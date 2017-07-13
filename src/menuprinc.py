@@ -138,7 +138,7 @@ class MenuPrinc:
     def on_w00_principal_delete_event(self):
         Gtk.main_quit()
 
-    def on_w00_principal_destroy(self):
+    def on_w00_principal_destroy(self, widget):
         Gtk.main_quit()
 
     def on_w00_principal_destroy_event(self):
