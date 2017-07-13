@@ -5,8 +5,8 @@ __author__ = 'John Evan Dizaro'
 try:
     import gi
     gi.require_version('Gtk', '3.0')
-except Exception as msg:
-    print(msg)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 try:
@@ -14,8 +14,8 @@ try:
     # from gi.repository import GLib, GObject, Gio, Pango, GdkPixbuf, Gtk, Gdk, GtkSource
     # import gi.repository
     # from gi.overrides.Gtk import Gtk
-except Exception as problema:
-    print(problema)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 
@@ -27,44 +27,44 @@ except Exception as problema:
 
 try:
     from os.path import dirname, abspath
-except Exception as problema:
-    print(problema)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 try:
     from src.lib.janelaproblema import JanelaProblema
-except Exception as problema:
-    print(problema)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 try:
     from src.cadcondominio import CadCondominio
-except Exception as problema:
-    print(problema)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 try:
     from src.cadportaria import CadPortaria
-except Exception as problema:
-    print(problema)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 try:
     from src.cadbloco import CadBloco
-except Exception as problema:
-    print(problema)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 try:
-    from src.lib.parametros import Parametros
-except Exception as problema:
-    print(problema)
+    import src.lib.parametros
+except Exception as prob:
+    print(prob)
     exit(1)
 
 try:
     from src.lib.logsistema import LogSistema
-except Exception as problema:
-    print(problema)
+except Exception as prob:
+    print(prob)
     exit(1)
 
 
@@ -77,7 +77,7 @@ class MenuPrinc:
         self.JP = JanelaProblema()
 
         self.ge_dic_param_sis = dict()
-        self.Pr = Parametros()
+        self.Pr = src.lib.parametros.Parametros()
         self.ge_dic_param_sis = self.Pr.carrega_parametros()
 
         if not self.ge_dic_param_sis:
@@ -123,7 +123,6 @@ class MenuPrinc:
     def on_mnu_cad_condominio_activate(self, widget):
 
         titulo = widget.get_label().strip('_')
-
         CadCondominio(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
     def on_mnu_cad_portaria_activate(self, widget):

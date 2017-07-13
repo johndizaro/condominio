@@ -30,7 +30,6 @@ except ImportError as problema:
     psycopg2 = None
     exit(1)
 
-
 # try:
 #     import sys
 # except ImportError as problema:
