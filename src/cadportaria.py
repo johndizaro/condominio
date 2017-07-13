@@ -4,6 +4,7 @@ __author__ = 'John Evan Dizaro'
 
 try:
     import gi
+
     gi.require_version('Gtk', '3.0')
 except ImportError as problema:
     gi = None
@@ -34,19 +35,19 @@ except ImportError as problema:
     print(problema)
     re = None
     exit(1)
-try:
-    import sys
-except ImportError as problema:
-    print(problema)
-    sys = None
-    exit(1)
+
+# try:
+#     import sys
+# except ImportError as problema:
+#     print(problema)
+#     sys = None
+#     exit(1)
 
 try:
     from os.path import dirname, abspath
 except Exception as problema:
     print(problema)
     exit(1)
-
 
 try:
     from src.lib.janelaproblema import JanelaProblema
@@ -68,7 +69,6 @@ except Exception as problema:
 
 
 class CadPortaria:
-
     def __init__(self, **kwarg):
 
         # self.ge_dic_dados = dict()
@@ -194,10 +194,11 @@ class CadPortaria:
 
     def on_b02_excluir_clicked(self, widget):
         """
-        verifica se foi selecionado uma portaria ṕara apagar e executa a rotina de apagar portaria
-        :param:
+        Apaga portaria selecionada
+        :param widget:
         :return:
         """
+
         apagado = False
 
         dic_dados = self.validar_campos()
@@ -227,16 +228,26 @@ class CadPortaria:
             exit(1)
 
     def on_cb02_a02_id_condominio_changed(self, widget):
+        """
+
+        :param widget:
+        :return:
+        """
         try:
             id_condominio = self.CBD.get_dado_combo(comboboxm=widget,
                                                     col_traz=self.col_cb02_a01_id_condominio)
             res = self.pesquisar_portarias(id_condominio=id_condominio)
             self.mostrar_dados_tv02(lista=self.lst_tv02, res=res)
             self.ge_id_condominio = id_condominio
-        except ValueError:
+        except AttributeError:
             pass
 
     def validar_campos(self):
+        """
+        Validação dos campos para salvar no banco de e dados
+        :return: Se retorna dic_dados = False então tem problemas nos dados
+                 Se retorna dic_dados com valors em um dicionario em pode salvar no banco de dados
+        """
 
         dic_dados = dict()
 
@@ -311,8 +322,7 @@ class CadPortaria:
 
         cur = conn.cursor()
         try:
-            cur.execute(
-                """
+            sql = """
                   UPDATE a02_portarias SET
                   a02_nome_portaria = %s,
                   a02_endereco = %s,
@@ -320,13 +330,13 @@ class CadPortaria:
                   WHERE a02_id_condominio = %s
                   AND a02_id_portaria = %s;
              """, (
-                    dic_dados['a02_nome_portaria'] if "a02_nome_portaria" in dic_dados else None,
-                    dic_dados['a02_endereco'] if "a02_endereco" in dic_dados else None,
-                    dic_dados['a02_numero'] if "a02_numero" in dic_dados else 0,
-                    dic_dados['a02_id_condominio'] if "a02_id_condominio" in dic_dados else 0,
-                    dic_dados['a02_id_portaria'] if "a02_id_portaria" in dic_dados else 0,
-                )
+                dic_dados['a02_nome_portaria'] if "a02_nome_portaria" in dic_dados else None,
+                dic_dados['a02_endereco'] if "a02_endereco" in dic_dados else None,
+                dic_dados['a02_numero'] if "a02_numero" in dic_dados else 0,
+                dic_dados['a02_id_condominio'] if "a02_id_condominio" in dic_dados else 0,
+                dic_dados['a02_id_portaria'] if "a02_id_portaria" in dic_dados else 0,
             )
+            cur.execute(sql)
         except psycopg2.DatabaseError as msg:
             logging.error(msg)
             self.JP.msgerro(janela=None,
@@ -361,9 +371,7 @@ class CadPortaria:
             return False
 
         cur = conn.cursor()
-        try:
-            cur.execute(
-                """
+        sql = """
              INSERT INTO a02_portarias
              (
              a02_id_condominio,
@@ -377,12 +385,13 @@ class CadPortaria:
              %s
              );
              """, (
-                    dic_dados['a02_id_condominio'] if "a02_id_condominio" in dic_dados else 0,
-                    dic_dados['a02_nome_portaria'] if "a02_nome_portaria" in dic_dados else None,
-                    dic_dados['a02_endereco'] if "a02_endereco" in dic_dados else None,
-                    dic_dados['a02_numero'] if "a02_numero" in dic_dados else 0,
-                )
-            )
+            dic_dados['a02_id_condominio'] if "a02_id_condominio" in dic_dados else 0,
+            dic_dados['a02_nome_portaria'] if "a02_nome_portaria" in dic_dados else None,
+            dic_dados['a02_endereco'] if "a02_endereco" in dic_dados else None,
+            dic_dados['a02_numero'] if "a02_numero" in dic_dados else 0,
+        )
+        try:
+            cur.execute(sql)
         except psycopg2.DatabaseError as msg:
             logging.error(msg)
             self.JP.msgerro(janela=None,
@@ -409,13 +418,11 @@ class CadPortaria:
 
         cur = conn.cursor()
         try:
-            cur.execute(
-                """
+            sql = """
              DELETE  from a02_portarias WHERE a02_id_portaria = %s;
-             """, (
-                    id_portaria,
-                )
-            )
+             """, (id_portaria,
+                   )
+            cur.execute(sql)
         except psycopg2.DatabaseError as msg:
             logging.error(msg)
             self.JP.msgerro(janela=None,
@@ -497,7 +504,7 @@ class CadPortaria:
                                                      text=self.col_tv02_dados_portaria)
         col_tv02_dados_portaria.set_visible(True)
         tv.append_column(col_tv02_dados_portaria)
-        col_tv02_dados_portaria.connect("clicked", self.clicado_col_tv02, tv,  self.col_tv02_dados_portaria)
+        col_tv02_dados_portaria.connect("clicked", self.clicado_col_tv02, tv, self.col_tv02_dados_portaria)
         col_tv02_dados_portaria.set_reorderable(True)
 
         tv.set_enable_search(True)
@@ -522,15 +529,16 @@ class CadPortaria:
             conn.set_client_encoding(self.ge_dic_param_sis['CLIENTEENCODING'])
 
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            cur.execute(""" select a02_id_condominio,
+            sql = """ select a02_id_condominio,
                                    a02_id_portaria,
                                    a02_nome_portaria,
                                    concat(a02_endereco, ', ', a02_numero) as dados_portaria
                             from a01_condominio, a02_portarias
                             WHERE a01_id_condominio = a02_portarias.a02_id_condominio
-                            and a01_id_condominio = %s order by upper(a02_nome_portaria);
+                            and a01_id_condominio = %s 
+                            order by upper(a02_nome_portaria);
                             """, (id_condominio,)
-                        )
+            cur.execute(sql)
             registros = cur.fetchall()
 
         except psycopg2.ProgrammingError as msg:
@@ -589,7 +597,7 @@ class CadPortaria:
             lista.append([
                 str(i['a01_id_condominio']),
                 str(i['a01_nome']) if i['a01_nome'] else None,
-                ])
+            ])
 
     def consulta_portaria(self, id_condominio, id_portaria):
 
@@ -648,4 +656,3 @@ class CadPortaria:
                     self.e02_a02_numero.set_text(str(value))
                 else:
                     self.e02_a02_numero.set_text('')
-
