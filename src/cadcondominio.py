@@ -60,8 +60,8 @@ class CadCondominio:
         self.col_a01_bairro = 4
         self.col_a01_cidade = 5
 
-        self.ge_dic_dados = dict()
-        self.ge_dic_param_sis = dict()
+        # self.ge_dic_dados = dict()
+        # self.ge_dic_param_sis = dict()
         self.ge_selecionado = False
 
         self.ge_a01_id_condominio = None
@@ -463,7 +463,11 @@ class CadCondominio:
         return True
 
     def mostrar_dados(self, dic_dados):
-
+        """
+        Mostra as informações na tela  com informaçãos ou limpando os campos
+        :param dic_dados:
+        :return:
+        """
         for key, value in dic_dados.items():
             if key == 'a01_nome':
                 if value is not None:
@@ -496,6 +500,11 @@ class CadCondominio:
                     self.e01_a01_cidade.set_text('')
 
     def desenha_tv01(self, tv):
+        """
+        Desenha treeview inclui as colunas de informações
+        :param tv:
+        :return:
+        """
 
         tv.set_rules_hint(True)
         tv.set_grid_lines(3)
