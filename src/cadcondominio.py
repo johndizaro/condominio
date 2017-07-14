@@ -64,6 +64,8 @@ class CadCondominio:
         self.ge_dic_param_sis = dict()
         self.ge_selecionado = False
 
+        self.ge_a01_id_condominio = None
+
         self.JP = JanelaProblema()
 
         if kwarg['dic_param_sis']:
@@ -82,8 +84,7 @@ class CadCondominio:
             self.JP.msgerro(janela=None, texto_primario="PARAMETROS", texto_secundario=msg)
             exit(1)
 
-        self.ge_a01_id_condominio = None
-        self.ge_selecionado = False
+
 
         self.builder = Gtk.Builder()
         try:
