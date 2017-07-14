@@ -167,7 +167,7 @@ class CadCondominio:
         tela = widget.get_parent_window()
         tela.destroy()
 
-    def on_b01_exluir_clicked(self):
+    def on_b01_exluir_clicked(self, widget):
 
         if not self.ge_selecionado:
             msg = "Você deverá selecionar o condomínio antes de exclui-lo"
@@ -186,13 +186,8 @@ class CadCondominio:
 
         self.e01_a01_nome.grab_focus()
 
-    def on_b01_salvar_clicked(self):
+    def on_b01_salvar_clicked(self, widget):
 
-        """
-        executa as rotina para salvar e validas os campos de tela
-        :param:
-        :return:
-        """
 
         if not self.validar_campos():
             return False
@@ -468,36 +463,67 @@ class CadCondominio:
         :param dic_dados:
         :return:
         """
-        for key, value in dic_dados.items():
-            if key == 'a01_nome':
-                if value is not None:
-                    self.e01_a01_nome.set_text(str(value))
-                else:
-                    self.e01_a01_nome.set_text('')
+        # for key, value in dic_dados.items():
+        #     if key == 'a01_nome':
+        #         if value is not None:
+        #             self.e01_a01_nome.set_text(str(value))
+        #         else:
+        #             self.e01_a01_nome.set_text('')
+        #
+        #     if key == 'a01_endereco':
+        #         if value is not None:
+        #             self.e01_a01_endereco.set_text(str(value))
+        #         else:
+        #             self.e01_a01_endereco.set_text('')
+        #
+        #     if key == 'a01_numero':
+        #         if value > 0:
+        #             self.e01_a01_numero.set_text(str(value))
+        #         else:
+        #             self.e01_a01_numero.set_text('')
+        #
+        #     if key == 'a01_bairro':
+        #         if value is not None:
+        #             self.e01_a01_bairro.set_text(str(value))
+        #         else:
+        #             self.e01_a01_bairro.set_text('')
+        #
+        #     if key == 'a01_cidade':
+        #         if value is not None:
+        #             self.e01_a01_cidade.set_text(str(value))
+        #         else:
+        #             self.e01_a01_cidade.set_text('')
 
-            if key == 'a01_endereco':
-                if value is not None:
-                    self.e01_a01_endereco.set_text(str(value))
-                else:
-                    self.e01_a01_endereco.set_text('')
 
-            if key == 'a01_numero':
-                if value > 0:
-                    self.e01_a01_numero.set_text(str(value))
-                else:
-                    self.e01_a01_numero.set_text('')
-
-            if key == 'a01_bairro':
-                if value is not None:
-                    self.e01_a01_bairro.set_text(str(value))
-                else:
-                    self.e01_a01_bairro.set_text('')
-
-            if key == 'a01_cidade':
-                if value is not None:
-                    self.e01_a01_cidade.set_text(str(value))
-                else:
-                    self.e01_a01_cidade.set_text('')
+        if 'a01_nome' in dic_dados.keys():
+            self.e01_a01_nome.set_text(str(dic_dados['a01_nome']))
+        else:
+            self.e01_a01_nome.set_t
+        if 'a01_endereco' in dic_dados.keys():
+            self.e01_a01_endereco.set_text(str(dic_dados['a01_endereco']))
+        else:
+            self.e01_a01_endereco.set_t
+        if 'a01_numero' in dic_dados.keys():
+            if int(dic_dados['a01_numero']) > 0:
+                self.e01_a01_numero.set_text(str(dic_dados['a01_numero']))
+            else:
+                self.e01_a01_numero.set_text('')
+        else:
+            self.e01_a01_numero.set_t
+        if 'a01_bairro' in dic_dados.keys():
+            if str(dic_dados['a01_bairro']) is not None:
+                self.e01_a01_bairro.set_text(str(dic_dados['a01_bairro']))
+            else:
+                self.e01_a01_bairro.set_text('')
+        else:
+            self.e01_a01_bairro.set_t
+        if 'a01_cidade' in dic_dados.keys():
+            if str(dic_dados['a01_cidade']) is not None:
+                self.e01_a01_cidade.set_text(str(dic_dados['a01_cidade']))
+            else:
+                self.e01_a01_cidade.set_text('')
+        else:
+            self.e01_a01_cidade.set_text('')
 
     def desenha_tv01(self, tv):
         """
