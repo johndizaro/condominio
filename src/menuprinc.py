@@ -157,10 +157,9 @@ class MenuPrinc:
         """
         Gtk.main_quit()
 
-    def on_w00_principal_destroy(self, widget):
+    def on_w00_principal_destroy(self):
         """
         Saida do sistema
-        :param widget:
         :return:
         """
         Gtk.main_quit()
