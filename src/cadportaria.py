@@ -153,7 +153,7 @@ class CadPortaria:
         self.w02.set_visible(True)
         self.w02.show_all()
 
-    def on_b02_fechar_clicked(self, widget):
+    def on_b02_fechar_clicked(self):
         """
         :param:
         :return:
@@ -163,7 +163,7 @@ class CadPortaria:
         # self.w02.destroy()
         self.w02.destroy()
 
-    def on_b02_salvar_clicked(self, widget):
+    def on_b02_salvar_clicked(self):
         """
         executa as rotina para salvar e validas os campos de tela
         :param:
@@ -192,10 +192,9 @@ class CadPortaria:
                             texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
 
-    def on_b02_excluir_clicked(self, widget):
+    def on_b02_excluir_clicked(self):
         """
         Apaga portaria selecionada
-        :param widget:
         :return:
         """
 
