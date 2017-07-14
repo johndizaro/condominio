@@ -311,7 +311,8 @@ class CadBloco:
                                                                 col_traz=self.col_a01_id_condominio)
 
             res = self.PB.pesquisar_blocos(id_condominio=self.ge_a01_id_condominio)
-            self.mostrar_dados_tv03(lista=self.lst_tv03, res=res)
+            if res:
+                self.mostrar_dados_tv03(lista=self.lst_tv03, res=res)
 
         except ValueError:
             pass

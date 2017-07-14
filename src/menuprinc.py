@@ -4,6 +4,7 @@ __author__ = 'John Evan Dizaro'
 
 try:
     import gi
+
     gi.require_version('Gtk', '3.0')
 except Exception as prob:
     print(prob)
@@ -17,7 +18,6 @@ try:
 except Exception as prob:
     print(prob)
     exit(1)
-
 
 # try:
 #     import sys
@@ -71,7 +71,7 @@ except Exception as prob:
 class MenuPrinc:
     def __init__(self):
         """
-        inicialisacao dos campos do menu
+        Inicialisação dos campos no menu
         """
         self.problema = None
         self.JP = JanelaProblema()
@@ -121,27 +121,55 @@ class MenuPrinc:
         Gtk.main()
 
     def on_mnu_cad_condominio_activate(self, widget):
+        """
+        Chama o cadastro de condominios
+        :param widget:
+        :return:
+        """
 
         titulo = widget.get_label().strip('_')
         CadCondominio(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
     def on_mnu_cad_portaria_activate(self, widget):
+        """
+        Chama o cadatro de portarias
+        :param widget:
+        :return:
+        """
 
         titulo = widget.get_label().strip('_')
         CadPortaria(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
     def on_mnu_cad_bloco_activate(self, widget):
+        """
+        Chama o cadastro de blocos
+        :param widget:
+        :return:
+        """
 
         titulo = widget.get_label().strip('_')
         CadBloco(dic_param_sis=self.ge_dic_param_sis, titulo=titulo)
 
     def on_w00_principal_delete_event(self):
+        """
+        Saida do sistema
+        :return:
+        """
         Gtk.main_quit()
 
     def on_w00_principal_destroy(self, widget):
+        """
+        Saida do sistema
+        :param widget:
+        :return:
+        """
         Gtk.main_quit()
 
     def on_w00_principal_destroy_event(self):
+        """
+        Saida do sistema
+        :return:
+        """
         Gtk.main_quit()
 
 

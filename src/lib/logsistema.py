@@ -47,11 +47,21 @@ class LogSistema:
                       'LINENO:%(lineno)d ' \
                       'MSG: %(message)-s'.format(ip)
 
+        # formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        # logger = logging.getLogger("exampleApp")
+        # logger.setLevel(logging.INFO)
+        # fh = logging.FileHandler(self.ge_dic_param_sis['LOG_CAMINHO'])
+        # fh.setFormatter(formatter)
+
         logging.basicConfig(
             format=formato_msg,
             level=tipo_log,
             filename=self.ge_dic_param_sis['LOG_CAMINHO'])
+        logging.info("Log ativado")
 
-        logging.info(" Entrou no sistema ")
+        # logger.addHandler(fh)
+        # logger.info("Log ativado")
+
+
 
 

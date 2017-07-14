@@ -229,7 +229,7 @@ class CadPortaria:
 
     def on_cb02_a02_id_condominio_changed(self, widget):
         """
-
+        Prepara dados para ser mostrado no combobox bem como item selecionado do combo
         :param widget:
         :return:
         """

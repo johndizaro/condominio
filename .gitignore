@@ -1,3 +1,9 @@
-
+.idea
 /src/logsistema.txt
 /.cache/
+src/__pycache__/
+src/lib/__pycache__/
+src/libsistema/__pycache__/
+
+.log
+/src/logsistema.log
