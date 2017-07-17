@@ -60,7 +60,7 @@ class CadCondominio:
         self.col_a01_bairro = 4
         self.col_a01_cidade = 5
 
-        # self.ge_dic_dados = dict()
+        self.ge_dic_dados = dict()
         # self.ge_dic_param_sis = dict()
         self.ge_selecionado = False
 
@@ -160,12 +160,12 @@ class CadCondominio:
             else:
                 self.limpar_tela()
 
-    def on_b01_fechar_clicked(self, widget):
+    def on_b01_fechar_clicked(self, button):
 
-        tela = widget.get_parent_window()
+        tela = button.get_parent_window()
         tela.destroy()
 
-    def on_b01_exluir_clicked(self, widget):
+    def on_b01_exluir_clicked(self, button):
 
         if not self.ge_selecionado:
             msg = "Você deverá selecionar o condomínio antes de exclui-lo"
@@ -184,7 +184,7 @@ class CadCondominio:
 
         self.e01_a01_nome.grab_focus()
 
-    def on_b01_salvar_clicked(self, widget):
+    def on_b01_salvar_clicked(self, button):
 
         if not self.validar_campos():
             return False
@@ -457,48 +457,20 @@ class CadCondominio:
     def mostrar_dados(self, dic_dados):
         """
         Mostra as informações na tela  com informaçãos ou limpando os campos
-        :param dic_dados:
+        :param dic_dados:dicionário com dados carregados do banco de dados
         :return:
         """
-        # for key, value in dic_dados.items():
-        #     if key == 'a01_nome':
-        #         if value is not None:
-        #             self.e01_a01_nome.set_text(str(value))
-        #         else:
-        #             self.e01_a01_nome.set_text('')
-        #
-        #     if key == 'a01_endereco':
-        #         if value is not None:
-        #             self.e01_a01_endereco.set_text(str(value))
-        #         else:
-        #             self.e01_a01_endereco.set_text('')
-        #
-        #     if key == 'a01_numero':
-        #         if value > 0:
-        #             self.e01_a01_numero.set_text(str(value))
-        #         else:
-        #             self.e01_a01_numero.set_text('')
-        #
-        #     if key == 'a01_bairro':
-        #         if value is not None:
-        #             self.e01_a01_bairro.set_text(str(value))
-        #         else:
-        #             self.e01_a01_bairro.set_text('')
-        #
-        #     if key == 'a01_cidade':
-        #         if value is not None:
-        #             self.e01_a01_cidade.set_text(str(value))
-        #         else:
-        #             self.e01_a01_cidade.set_text('')
 
         if 'a01_nome' in dic_dados.keys():
             self.e01_a01_nome.set_text(str(dic_dados['a01_nome']))
         else:
             self.e01_a01_nome.set_text('')
+
         if 'a01_endereco' in dic_dados.keys():
             self.e01_a01_endereco.set_text(str(dic_dados['a01_endereco']))
         else:
             self.e01_a01_endereco.set_text('')
+
         if 'a01_numero' in dic_dados.keys():
             if int(dic_dados['a01_numero']) > 0:
                 self.e01_a01_numero.set_text(str(dic_dados['a01_numero']))
@@ -506,6 +478,7 @@ class CadCondominio:
                 self.e01_a01_numero.set_text('')
         else:
             self.e01_a01_numero.set_text('')
+
         if 'a01_bairro' in dic_dados.keys():
             if str(dic_dados['a01_bairro']) is not None:
                 self.e01_a01_bairro.set_text(str(dic_dados['a01_bairro']))
@@ -513,6 +486,7 @@ class CadCondominio:
                 self.e01_a01_bairro.set_text('')
         else:
             self.e01_a01_bairro.set_text('')
+
         if 'a01_cidade' in dic_dados.keys():
             if str(dic_dados['a01_cidade']) is not None:
                 self.e01_a01_cidade.set_text(str(dic_dados['a01_cidade']))
