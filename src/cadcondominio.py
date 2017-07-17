@@ -458,7 +458,7 @@ class CadCondominio:
         del conn, cur
         return True
 
-    def mostrar_dados(self, dic_dados):
+    def mostrar_dados(self, dic_dados={}):
         """
         Mostra as informações na tela  com informaçãos ou limpando os campos
         :param dic_dados:dicionário com dados carregados do banco de dados
