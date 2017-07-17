@@ -84,8 +84,6 @@ class CadCondominio:
             self.JP.msgerro(janela=None, texto_primario="PARAMETROS", texto_secundario=msg)
             exit(1)
 
-
-
         self.builder = Gtk.Builder()
         try:
             self.caminho = '/'.join([abspath(dirname(__file__)), 'glade', 'menu-principal.glade'])
@@ -187,7 +185,6 @@ class CadCondominio:
         self.e01_a01_nome.grab_focus()
 
     def on_b01_salvar_clicked(self, widget):
-
 
         if not self.validar_campos():
             return False
@@ -494,29 +491,28 @@ class CadCondominio:
         #         else:
         #             self.e01_a01_cidade.set_text('')
 
-
         if 'a01_nome' in dic_dados.keys():
             self.e01_a01_nome.set_text(str(dic_dados['a01_nome']))
         else:
-            self.e01_a01_nome.set_t
+            self.e01_a01_nome.set_text('')
         if 'a01_endereco' in dic_dados.keys():
             self.e01_a01_endereco.set_text(str(dic_dados['a01_endereco']))
         else:
-            self.e01_a01_endereco.set_t
+            self.e01_a01_endereco.set_text('')
         if 'a01_numero' in dic_dados.keys():
             if int(dic_dados['a01_numero']) > 0:
                 self.e01_a01_numero.set_text(str(dic_dados['a01_numero']))
             else:
                 self.e01_a01_numero.set_text('')
         else:
-            self.e01_a01_numero.set_t
+            self.e01_a01_numero.set_text('')
         if 'a01_bairro' in dic_dados.keys():
             if str(dic_dados['a01_bairro']) is not None:
                 self.e01_a01_bairro.set_text(str(dic_dados['a01_bairro']))
             else:
                 self.e01_a01_bairro.set_text('')
         else:
-            self.e01_a01_bairro.set_t
+            self.e01_a01_bairro.set_text('')
         if 'a01_cidade' in dic_dados.keys():
             if str(dic_dados['a01_cidade']) is not None:
                 self.e01_a01_cidade.set_text(str(dic_dados['a01_cidade']))
