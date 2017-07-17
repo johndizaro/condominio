@@ -167,6 +167,8 @@ class CadCondominio:
 
     def on_b01_exluir_clicked(self, button):
 
+        button.set_sensitive(True)
+
         if not self.ge_selecionado:
             msg = "Você deverá selecionar o condomínio antes de exclui-lo"
             self.JP.msgwarning(janela=self.w01, texto_primario="ATENÇÃO", texto_secundario=msg)
@@ -185,6 +187,8 @@ class CadCondominio:
         self.e01_a01_nome.grab_focus()
 
     def on_b01_salvar_clicked(self, button):
+
+        button.set_sensitive(True)
 
         if not self.validar_campos():
             return False
