@@ -1,5 +1,6 @@
 .idea
-/src/logsistema.log
 src/__pycache__/
 src/lib/__pycache__/
 src/libsistema/__pycache__/
+src/glade/menu-principal.glade~
+/src/logsistema.log
