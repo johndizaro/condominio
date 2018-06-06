@@ -104,7 +104,7 @@ class CadPortaria:
         self.PC = PesqCondominio(dic_param_sis=self.ge_dic_param_sis)
         self.builder = Gtk.Builder()
         try:
-            self.Caminho = '/'.join([abspath(dirname(__file__)), 'glade', 'menu-principal.glade'])
+            self.Caminho = '/'.join([abspath(dirname(__file__)), 'glade', self.ge_dic_param_sis['AMBIENTE_TELA']])
             self.builder.add_objects_from_file(self.Caminho, ["w02_portaria"])
         except Exception as msg:
             logging.error(msg)
@@ -153,7 +153,7 @@ class CadPortaria:
         self.w02.set_visible(True)
         self.w02.show_all()
 
-    def on_b02_fechar_clicked(self):
+    def on_b02_fechar_clicked(self, widget):
         """
         :param:
         :return:
@@ -163,7 +163,7 @@ class CadPortaria:
         # self.w02.destroy()
         self.w02.destroy()
 
-    def on_b02_salvar_clicked(self):
+    def on_b02_salvar_clicked(self, widget):
         """
         executa as rotina para salvar e validas os campos de tela
         :param:
@@ -192,7 +192,7 @@ class CadPortaria:
                             texto_primario="Cadastro de Portaria",
                             texto_secundario=msg)
 
-    def on_b02_excluir_clicked(self):
+    def on_b02_excluir_clicked(self, widget):
         """
         Apaga portaria selecionada
         :return:
@@ -264,12 +264,12 @@ class CadPortaria:
 
         if len(str(self.e02_a02_nome_portaria.get_text().strip())) == 0:
             dic_dados = {}
-            self.e02_a02_nome_portaria.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+            self.e02_a02_nome_portaria.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
             self.e02_a02_nome_portaria.grab_focus()
             valido = False
         else:
             dic_dados['a02_nome_portaria'] = str(self.e02_a02_nome_portaria.get_text().strip())
-            self.e02_a02_nome_portaria.set_property("primary-icon-stock", None)
+            self.e02_a02_nome_portaria.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
 
         if len(str(self.e02_a02_endereco.get_text().strip())) > 0:
             dic_dados['a02_endereco'] = str(self.e02_a02_endereco.get_text().strip())
@@ -280,12 +280,13 @@ class CadPortaria:
             wcampo = numerovalido.sub('', self.e02_a02_numero.get_text().strip())
             if len(wcampo) > 0:
                 dic_dados = {}
-                self.e02_a02_numero.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+                self.e02_a02_numero.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
+
                 self.e02_a02_numero.grab_focus()
                 valido = False
             else:
                 dic_dados['a02_numero'] = self.e02_a02_numero.get_text()
-                self.e02_a02_numero.set_property("primary-icon-stock", None)
+                self.e02_a02_numero.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
 
         if valido is False:
             dic_dados = False
@@ -307,9 +308,9 @@ class CadPortaria:
         self.e02_a02_endereco.set_text('')
         self.e02_a02_numero.set_text('')
 
-        self.e02_a02_nome_portaria.set_property("primary-icon-stock", None)
-        self.e02_a02_endereco.set_property("primary-icon-stock", None)
-        self.e02_a02_numero.set_property("primary-icon-stock", None)
+        self.e02_a02_nome_portaria.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
+        self.e02_a02_endereco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
+        self.e02_a02_numero.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
 
     def alterar(self, dic_dados):
         try:

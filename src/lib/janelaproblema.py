@@ -4,14 +4,18 @@ from gi.repository import Gtk
 class JanelaProblema:
 
     def __init__(self):
+        """
+
+        :rtype: object
+        """
         pass
 
     def msginformativo(self, janela=None, texto_primario='', texto_secundario=''):
         dialog = Gtk.MessageDialog(janela, Gtk.DialogFlags.MODAL,
                                    Gtk.MessageType.INFO,
                                    Gtk.ButtonsType.OK,
-                                   texto_primario)
-        dialog.format_secondary_text(texto_secundario)
+                                   str(texto_primario))
+        dialog.format_secondary_text(str(texto_secundario))
         dialog.run()
         dialog.destroy()
 

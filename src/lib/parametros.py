@@ -35,6 +35,8 @@ class Parametros:
         dic_parametros['LOG_CAMINHO'] = config.get('LOG', 'LOG_CAMINHO')
         dic_parametros['TIPO_LOG'] = config.get('LOG', 'TIPO_LOG')
 
+        dic_parametros['AMBIENTE_TELA'] = config.get('AMBIENTE', 'TELA')
+
         dic_parametros['DSN'] = "dbname='%s' user='%s' password='%s' host='%s' port='%s'" % (
                 dic_parametros['NOMEBANCO'],
                 dic_parametros['USUARIO'],

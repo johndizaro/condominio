@@ -134,7 +134,7 @@ class CadBloco:
 
         self.builder = Gtk.Builder()
         try:
-            self.caminho = '/'.join([abspath(dirname(__file__)), 'glade', 'menu-principal.glade'])
+            self.caminho = '/'.join([abspath(dirname(__file__)), 'glade', self.ge_dic_param_sis['AMBIENTE_TELA']])
             self.builder.add_objects_from_file(self.caminho, ["w03_bloco"])
         except Exception as msg:
             logging.error(msg)
@@ -268,7 +268,7 @@ class CadBloco:
         tela.destroy()
         # self.w03.destroy()
 
-    def on_b03_salvar_clicked(self):
+    def on_b03_salvar_clicked(self, widget):
         """
         Manda executar a validação dos campos da tela bem como verifica se
         os dados devem ser alterados ou incluidos
@@ -373,7 +373,7 @@ class CadBloco:
 
         self.e03_a03_nome_bloco.set_text('')
 
-        self.e03_a03_nome_bloco.set_property("primary-icon-stock", None)
+        self.e03_a03_nome_bloco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
 
     def validar_campos(self):
         """
@@ -389,12 +389,12 @@ class CadBloco:
         dic_dados['a03_id_condominio'] = self.ge_a01_id_condominio
 
         if len(str(self.e03_a03_nome_bloco.get_text().strip())) == 0:
-            self.e03_a03_nome_bloco.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+            self.e03_a03_nome_bloco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
             self.e03_a03_nome_bloco.grab_focus()
             valido = False
         else:
             dic_dados['a03_nome_bloco'] = str(self.e03_a03_nome_bloco.get_text().strip())
-            self.e03_a03_nome_bloco.set_property("primary-icon-stock", None)
+            self.e03_a03_nome_bloco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
 
         if not valido:
             dic_dados = False
@@ -513,7 +513,7 @@ class CadBloco:
 
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute(""" SELECT *
-                            FROM  a03_blocos
+                            from a03_blocos
                             WHERE a03_id_bloco = %s;
                             """, (id_bloco,)
                         )

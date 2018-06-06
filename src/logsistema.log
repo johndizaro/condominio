@@ -3,3 +3,27 @@
     INFO: 	2017-07-17 16:59:45,588 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
     INFO: 	2017-07-17 17:02:52,110 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
     INFO: 	2017-07-17 17:18:12,064 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-09-28 00:44:26,282 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-10-03 01:13:36,513 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-10-03 01:28:03,779 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-10-03 01:31:11,011 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-10-03 01:32:14,957 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-10-03 01:35:12,261 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+   ERROR: 	2017-10-03 01:35:16,371 IP:127.0.1.1       FILENAME:cadcondominio.py     FUNCNAME:pesquisar_condominio           MODULE:cadcondominio LINENO:566 MSG: relation "a01_condominio" does not exist
+LINE 7:                             FROM  a01_condominio ORDER BY UP...
+                                          ^
+
+    INFO: 	2017-10-03 01:35:46,497 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+   ERROR: 	2017-10-03 01:35:49,252 IP:127.0.1.1       FILENAME:cadcondominio.py     FUNCNAME:pesquisar_condominio           MODULE:cadcondominio LINENO:566 MSG: relation "a01_condominio" does not exist
+LINE 7:                             FROM  a01_condominio ORDER BY UP...
+                                          ^
+
+    INFO: 	2017-10-03 01:37:43,153 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-10-03 01:40:59,994 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-11-23 14:30:21,460 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+   ERROR: 	2017-11-23 14:30:31,192 IP:127.0.1.1       FILENAME:pesqcondominio.py    FUNCNAME:pesquisar_condominios          MODULE:pesqcondominio LINENO:59 MSG: FATAL:  password authentication failed for user "dizaro"
+FATAL:  password authentication failed for user "dizaro"
+
+    INFO: 	2017-12-04 11:08:03,470 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-12-04 11:08:25,246 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado
+    INFO: 	2017-12-04 11:09:03,320 IP:127.0.1.1       FILENAME:logsistema.py        FUNCNAME:__init__                       MODULE:logsistema LINENO:60 MSG: Log ativado

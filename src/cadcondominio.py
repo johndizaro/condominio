@@ -86,7 +86,8 @@ class CadCondominio:
 
         self.builder = Gtk.Builder()
         try:
-            self.caminho = '/'.join([abspath(dirname(__file__)), 'glade', 'menu-principal.glade'])
+            self.caminho = '/'.join([abspath(dirname(__file__)), 'glade', self.ge_dic_param_sis['AMBIENTE_TELA']])
+
             self.builder.add_objects_from_file(self.caminho, ["w01_condominio"])
         except Exception as msg:
             logging.error(msg)
@@ -126,7 +127,8 @@ class CadCondominio:
         self.tv01_a01.set_model(self.lst_tv01)
         self.desenha_tv01(tv=self.tv01_a01)
         res = self.pesquisar_condominio()
-        self.preencher_condominio(lista=self.lst_tv01, res=res)
+        if res:
+            self.preencher_condominio(lista=self.lst_tv01, res=res)
         # -------------------------------------------------------------------
 
         self.w01.set_visible(True)
@@ -213,7 +215,7 @@ class CadCondominio:
         try:
             conn = psycopg2.connect(self.ge_dic_param_sis['DSN'])
             conn.set_client_encoding(self.ge_dic_param_sis['CLIENTEENCODING'])
-        except psycopg2.ProgrammingError as msg:
+        except (psycopg2.ProgrammingError, psycopg2.OperationalError) as msg:
             logging.error(msg)
             self.JP.msgerro(janela=self.w01, texto_primario=self.ge_titulo, texto_secundario=msg)
             return False
@@ -223,7 +225,6 @@ class CadCondominio:
             cur.execute(
                 """
              DELETE  FROM  a01_condominio WHERE a01_id_condominio = %s;
-
              """, (
                     id_condominio,
                 )
@@ -254,11 +255,12 @@ class CadCondominio:
         self.e01_a01_endereco.set_text('')
         self.e01_a01_numero.set_text('')
 
-        self.e01_a01_nome.set_property("primary-icon-stock", None)
-        self.e01_a01_bairro.set_property("primary-icon-stock", None)
-        self.e01_a01_cidade.set_property("primary-icon-stock", None)
-        self.e01_a01_endereco.set_property("primary-icon-stock", None)
-        self.e01_a01_numero.set_property("primary-icon-stock", None)
+        self.e01_a01_nome.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
+        self.e01_a01_bairro.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
+        self.e01_a01_cidade.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
+        self.e01_a01_endereco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
+        self.e01_a01_numero.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
+
 
     def validar_campos(self):
 
@@ -275,49 +277,49 @@ class CadCondominio:
 
         if len(str(self.e01_a01_nome.get_text().strip())) == 0:
             self.ge_dic_dados = {}
-            self.e01_a01_nome.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+            self.e01_a01_nome.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
             self.e01_a01_nome.grab_focus()
             valido = False
         else:
             self.ge_dic_dados['e01_a01_nome'] = str(self.e01_a01_nome.get_text().strip())
-            self.e01_a01_nome.set_property("primary-icon-stock", None)
+            self.e01_a01_nome.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "")
 
         if len(str(self.e01_a01_endereco.get_text().strip())) == 0:
             self.ge_dic_dados = {}
-            self.e01_a01_endereco.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+            self.e01_a01_endereco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
             self.e01_a01_endereco.grab_focus()
             valido = False
         else:
             self.ge_dic_dados['e01_a01_endereco'] = str(self.e01_a01_endereco.get_text().strip())
-            self.e01_a01_endereco.set_property("primary-icon-stock", None)
+            self.e01_a01_endereco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "")
 
         if len(str(self.e01_a01_bairro.get_text().strip())) == 0:
             self.ge_dic_dados = {}
-            self.e01_a01_bairro.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+            self.e01_a01_bairro.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
             self.e01_a01_bairro.grab_focus()
             valido = False
         else:
             self.ge_dic_dados['e01_a01_bairro'] = str(self.e01_a01_bairro.get_text().strip())
-            self.e01_a01_bairro.set_property("primary-icon-stock", None)
+            self.e01_a01_bairro.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "")
 
         if len(str(self.e01_a01_cidade.get_text().strip())) == 0:
             self.ge_dic_dados = {}
-            self.e01_a01_cidade.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+            self.e01_a01_cidade.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
             self.e01_a01_cidade.grab_focus()
             valido = False
         else:
             self.ge_dic_dados['e01_a01_cidade'] = str(self.e01_a01_cidade.get_text().strip())
-            self.e01_a01_cidade.set_property("primary-icon-stock", None)
+            self.e01_a01_cidade.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "")
 
         wcampo = numerovalido.sub('', self.e01_a01_numero.get_text().strip())
         if len(wcampo) > 0 or self.e01_a01_numero.get_text() == "":
             self.ge_dic_dados = {}
-            self.e01_a01_numero.set_property("primary-icon-stock", Gtk.STOCK_DIALOG_ERROR)
+            self.e01_a01_numero.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "dialog-error")
             self.e01_a01_numero.grab_focus()
             valido = False
         else:
             self.ge_dic_dados['e01_a01_numero'] = self.e01_a01_numero.get_text()
-            self.e01_a01_numero.set_property("primary-icon-stock", None)
+            self.e01_a01_numero.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "")
 
         return valido
 
@@ -562,7 +564,7 @@ class CadCondominio:
                         )
             registros = cur.fetchall()
 
-        except psycopg2.ProgrammingError as msg:
+        except (psycopg2.ProgrammingError, psycopg2.OperationalError) as msg:
             logging.error(msg)
             self.JP.msgerro(janela=self.w01, texto_primario=self.ge_titulo, texto_secundario=msg)
             return False

@@ -1,3 +1,4 @@
+# coding: utf-8
 import logging
 
 __author__ = 'John Evan Dizaro'
@@ -33,6 +34,7 @@ except Exception as prob:
 
 try:
     from src.lib.janelaproblema import JanelaProblema
+    # from lib.janelaproblema import JanelaProblema
 except Exception as prob:
     print(prob)
     exit(1)
@@ -56,7 +58,7 @@ except Exception as prob:
     exit(1)
 
 try:
-    import src.lib.parametros
+    from src.lib.parametros import Parametros
 except Exception as prob:
     print(prob)
     exit(1)
@@ -77,7 +79,8 @@ class MenuPrinc:
         self.JP = JanelaProblema()
 
         self.ge_dic_param_sis = dict()
-        self.Pr = src.lib.parametros.Parametros()
+
+        self.Pr = Parametros()
         self.ge_dic_param_sis = self.Pr.carrega_parametros()
 
         if not self.ge_dic_param_sis:
@@ -102,7 +105,7 @@ class MenuPrinc:
         self.builder = Gtk.Builder()
 
         try:
-            self.caminho_tela = '/'.join([self.caminho_src, 'glade', 'menu-principal.glade'])
+            self.caminho_tela = '/'.join([self.caminho_src, 'glade', self.ge_dic_param_sis['AMBIENTE_TELA']])
             self.builder.add_objects_from_file(self.caminho_tela, ["w00_principal"])
         except Exception as problema_tl:
             logging.error(problema_tl)
@@ -157,7 +160,7 @@ class MenuPrinc:
         """
         Gtk.main_quit()
 
-    def on_w00_principal_destroy(self):
+    def on_w00_principal_destroy(self, widget):
         """
         Saida do sistema
         :return:
