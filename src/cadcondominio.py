@@ -261,7 +261,6 @@ class CadCondominio:
         self.e01_a01_endereco.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
         self.e01_a01_numero.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
 
-
     def validar_campos(self):
 
         """

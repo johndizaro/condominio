@@ -1,10 +1,5 @@
-import  unittest
+import unittest
 from os.path import abspath, dirname
-
-import gi
-from src.lib.parametros import Parametros
-from gi.repository import Gtk
-# from src.menuprinc import MenuPrinc
 
 try:
     from src.lib.parametros import Parametros
@@ -25,12 +20,9 @@ class TestMenuPrinc(unittest.TestCase):
 
         self.Pr = Parametros()
 
-
     def test_carrega_parametros(self):
 
         self.assertTrue(self.Pr.carrega_parametros())
-
-
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
@@ -45,10 +37,6 @@ class TestMenuPrinc(unittest.TestCase):
 
     # def tearDown(self):
     #     self.widget.dispose()
-
-
-
-
 
     def test_numbers_3_4(self):
         self.assertEqual(3 * 4, 12)
