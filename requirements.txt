@@ -1,7 +1,6 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: linux-64
-astroid=1.6.4=py36_0
 at-spi2-atk=2.18.1=2
 at-spi2-core=2.18.3=2
 atk=2.18.0=3
