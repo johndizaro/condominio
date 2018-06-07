@@ -2,7 +2,6 @@
 # $ conda create --name <env> --file <this file>
 # platform: linux-64
 
-atk=2.18.0=3
 ca-certificates=2018.03.07=0
 cairo=1.14.10=0
 cairo-gobject=1.12.18=8
