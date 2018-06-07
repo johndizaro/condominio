@@ -12,7 +12,7 @@ env:
 
 install:
     - mkdir -p ${HOME}/cache/pkgs
-    - source activate ${CONDA_INSTALL_LOCN}
+    - source activate ${CONDA_INSTALL_LOCN}/
     - conda install --yes --file requirements.txt
 
 script:
