@@ -1,7 +1,6 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: linux-64
-
 ca-certificates=2018.03.07=0
 cairo=1.14.10=0
 cairo-gobject=1.12.18=8
@@ -14,7 +13,6 @@ gdk-pixbuf=2.32.2=2
 gettext=0.19.8.1=0
 glib=2.55.0=0
 gobject-introspection=1.55.0=py36_0
-gtk3=3.14.15=4
 harfbuzz=1.0.6=3
 icu=58.2=h9c2bf20_1
 jpeg=9b=h024ee3a_2
@@ -41,7 +39,6 @@ pycairo=1.16.3=py36_0
 pygobject=3.28.3=py36h23641be_0
 python=3.6.2=0
 readline=6.2=2
-requirements-detector=0.5.2=py36_0
 setuptools=39.2.0=py36_0
 six=1.11.0=py36_1
 sqlite=3.13.0=0
