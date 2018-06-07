@@ -7,18 +7,22 @@ python:
   - "3.6"
 
 # command to install dependencies
+env:
+    global:
+       - CONDA_INSTALL_LOCN="${HOME}/conda"
+
 install:
     - mkdir -p ${HOME}/cache/pkgs
-    - bash ${HOME}/cache/miniconda.sh -b -p ${CONDA_INSTALL_LOCN}
-    - source ${CONDA_INSTALL_LOCN}/bin/activate root
+    #- bash ${HOME}/cache/miniconda.sh -b -p ${CONDA_INSTALL_LOCN}
+    - source ${CONDA_INSTALL_LOCN}/bin/activate
     - conda update --yes --quiet conda
 
     # Re-use the packages in the cache, and download any new ones into that location.
     #- rm -rf ${CONDA_INSTALL_LOCN}/pkgs && ln -s ${HOME}/cache/pkgs ${CONDA_INSTALL_LOCN}/pkgs
 
     # Now do the things we need to do to install it.
-    - conda install --file requirements.txt
-    - python -m pip install -e .
+    - conda install --file requirements.txt --yes --quiet -c conda-forge
+    #- python -m pip install -e .
 
 
 script:
