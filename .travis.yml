@@ -15,7 +15,7 @@ install:
     - mkdir -p ${HOME}/cache/pkgs
     #- bash ${HOME}/cache/miniconda.sh -b -p ${CONDA_INSTALL_LOCN}
     - source activate ${CONDA_INSTALL_LOCN}
-    - conda update --yes --quiet conda
+    #- conda update --yes --quiet conda
 
     # Re-use the packages in the cache, and download any new ones into that location.
     #- rm -rf ${CONDA_INSTALL_LOCN}/pkgs && ln -s ${HOME}/cache/pkgs ${CONDA_INSTALL_LOCN}/pkgs
