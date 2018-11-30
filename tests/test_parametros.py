@@ -60,6 +60,6 @@ class TestParametros(TestCase):
     def test_parametos_dns(self):
 
         self.assertTrue('DSN' in self.dicionario)
-
+    #
     # def tearDown(self):
     #     self.Pr.dispose()
