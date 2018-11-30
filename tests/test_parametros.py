@@ -51,7 +51,7 @@ class TestParametros(TestCase):
 
     def test_parametos_tipo_log(self):
 
-        self.assertTrue(self.dicionario['TIPO_LOG'] in ('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'),msg='tipo de log inesistente')
+        self.assertTrue(self.dicionario['TIPO_LOG'] in ('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'), msg='tipo de log inesistente')
 
     def test_parametos_ambiente_tela(self):
 
