@@ -1,6 +1,7 @@
 language: python
 python:
-  - "3.4"
+  - "3.5"
+  - "3.6"
 install:
   #- sudo apt-get update
   # We do this conditionally because it saves us some downloading if the
@@ -21,4 +22,4 @@ install:
   # Replace dep1 dep2 ... with your dependencies
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
-  - python menuprinc.py
+  - python condominio.py
