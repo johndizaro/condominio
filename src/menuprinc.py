@@ -34,7 +34,6 @@ except Exception as prob:
 
 try:
     from src.lib.janelaproblema import JanelaProblema
-    # from lib.janelaproblema import JanelaProblema
 except Exception as prob:
     print(prob)
     exit(1)
@@ -175,5 +174,5 @@ class MenuPrinc:
         Gtk.main_quit()
 
 
-if __name__ == "__main__":
-    MenuPrinc()
+# if __name__ == "__main__":
+#     MenuPrinc()
