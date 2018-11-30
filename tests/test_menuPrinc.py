@@ -3,6 +3,7 @@ from unittest import TestCase
 
 class TestMenuPrinc(TestCase):
     pass
+
     # def test_on_mnu_cad_condominio_activate(self):
     #     self.fail()
     #

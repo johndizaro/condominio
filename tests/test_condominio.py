@@ -9,3 +9,4 @@ class TestCondominio(TestCase):
 
     def tearDown(self):
         self.Cd.dispose()
+
